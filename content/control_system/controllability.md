@@ -93,4 +93,29 @@ In other words, we will need to have 2 control knobs to make this system pass th
 #### 3.3 <font color=red>Cayley-Hamilton Theory</font>
 Cayley-Hamilton Theory is extremely important, and it states like this: 
 
-"Every square matrix A satisfies its only characteristic (eigenvalue) equation."
+"Every square matrix **A** satisfies its own characteristic (eigenvalue) equation."   In mathmatics, for a matrix **A**, where its characteristics or eigenvalue 
+equation:
+$$det(\textbf{A} - \lambda \textbf{I}) = 0$$
+in another term $\color{red}{*}$: 
+$$\lambda^n + a_{n-1} \lambda^{n-1} + ... + a_2 \lambda^{2} + a_1 \lambda + a_0 = 0$$
+
+We can get, according to Cayley-Hamilton Theory:
+$$\textbf{A}^n + a_{n-1} \textbf{A}^{n-1} + ... + a_2 \textbf{A}^{2} + a_1 \textbf{A} + a_0 \textbf{I} = 0$$
+
+Move second to last terms to the right hand side of the matrix, we can get:
+$$\textbf{A}^n = - a_0 \textbf{I} - a_1 \textbf{A} - a_2 \textbf{A}^{2} - ... - a\_{n-1} \textbf{A}^{n-1}$$
+
+this can be further simplified into:
+$$\textbf{A}^{\geq n} = \sum_{j=0}^{n-1} \alpha_j \textbf{A}^j$$
+
+This is remarkable because we can now sum a matrix $\textbf{A}$ to the $n$th power into a neat form. Recall that for a system $\dot{x} =  \textbf{A}x + \textbf{B}u$, the solution is:
+$$e^{\textbf{A}t} = \textbf{I} + \textbf{A}t + \frac{\textbf{A}^2 t^2}{2} + \frac{\textbf{A}^3 t^3}{3} + ...$$
+
+and now, we can transform this endless equation into:
+$$e^{\textbf{A}t} = \phi_0 (t) \textbf{I} + \phi_1 (t) \textbf{A} + \phi_2 (t) \textbf{A}^2 + ... + \phi\_{n-1} (t) \textbf{A}^{n-1}.$$
+
+period. We therefore successfully utilizing Caley-Hamilton Theory to represent $e^{\textbf{A}t}$ into a sum of finite series of powers of **A** up to $n-1$, with time-variant coefficients $\phi's$.
+This finite sum allows us to show mathmatically that controllabilty and reachablity are equivalent. 
+
+#### 3.4 
+
