@@ -55,8 +55,19 @@ descent algorithm, we only have one learning rate $\alpha$. This means if have 2
 because of the fixed learning rate, we will always run in small step in that small scale feature. If the path to the minimum is fixed,
 this of course will take longer time to get there.
 
+**Mean Normalization**<br>
+The method we use for feature scaling is called mean normalization. For feature $x\_i$, we replace it with $x\_i - \mu\_i$ to 
+make the value of this feature have approximately zero mean. Notice this doesn't apply for $x\_0$ since it's always 1. 
+
+The mean normalization formula is:
+$$x\_i \leftarrow \frac{x\_i - \mu}{\sigma}$$
+
+where $\mu$ is the mean value of $x_i$ in all training set, and $\sigma$ is the standard deviation of $x_i$ in all training set.
+This is also called "Standard Score" or "**z-score**". It is the number of standard deviations from the mean a data point is. 
 
 
+### II. Normal Equation
+Instead of using gradient descent, sometimes we can find the global minimum analytically using **normal equation**
 
 
 

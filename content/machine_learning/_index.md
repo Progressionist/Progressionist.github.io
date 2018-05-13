@@ -1,6 +1,5 @@
 +++
-title =  "Machine Learning"
-pre = " <b>2. </b>"
+title =  "2. Machine Learning"
 chapter =  true
 
 +++

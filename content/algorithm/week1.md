@@ -171,3 +171,53 @@ In practice this algorithm is close to linear run time (very fast!)
 
 
 ### II. Analysis of Algorithms
+#### 1. Binary Search
+Binary search is a fundamental algorithm, and it's notoriously tricky to get every detail right. Below is the code 
+implementation:
+
+    class BinarySearch:
+        def __init__(self, list, key):
+            self.search(list, key)
+    
+        def search(self, list, key):
+            lo = 0
+            hi = len(list) - 1
+                
+            while (lo <= hi):
+                mid = lo + (hi - lo) / 2
+                if key < list[mid]:
+                    hi = mid - 1
+                elif key > list[mid]:
+                    lo = mid + 1
+                else:
+                    return mid
+            return -1 #-1 means key not found
+Let's point out a couple of places that needs to be careful: <br>
+1. The reason to use "mid = lo + (hi - lo) / 2" instead of "mid = (hi + lo) / 2" is to prevent overflow if hi and lo
+are huge number. Otherwise they are the same. <br>
+2. When we move either the lo or hi key, we move to the mid plus or minus 1, because we know the original mid is not the key <br>
+3. Notice the while loop use "lo <= hi" instead of "lo < hi" because there might be situation when the lo, hi, and the seeking key are
+the same number, we still need one more loop to find the key (the next step will be to find the mid is also the key). For example [33, 35, 36],
+we want to find 33, lo is currently on 33, hi is currently on 36. In the next step, hi will move to mid - 1 which is also 33. <br>
+
+Since we are dividing the array N each time, it's obvious that binary search is $\lg N$ in run time.
+
+#### 2. Theory of Algorithm
+Let's take a look at common notations that we use in the theory of algorithm:
+![theory_of_algorithm](https://user-images.githubusercontent.com/25803108/33253845-6f0fcef6-d2fa-11e7-950d-a1e4f54d6d73.png)
+
+1. The Big Theta is to describe the approximate run time of an algorithm. <br>
+2. The Big Oh is to describe the upper bound of an algorithm (larger means slower). <br>
+3. The Big Theta is to describe the lower bound of an algorithm (lower means faster). <br>
+
+The optimal algorithm usually lies between the upper and lower bound.
+
+#### 3. Memory
+This section is some basic knowledge on memory. First off, some bit and byte relationship: <br>
+1. Bit: 0 or 1. <br>
+2. Byte: 8 bits. <br>
+3. Megabyte(MB): $2^{20}$ bytes. <br>
+4. Gigabyte(GB): $2^{30}$ bytes. <br>
+
+Overhead is the combination of computation time, memory or other resources that are required to perform a specific
+task. (It's in additional to the resource of the task itself.)
