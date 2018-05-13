@@ -1,5 +1,26 @@
 [
 {
+	"uri": "http://example.org/control_system/",
+	"title": "1. Control System",
+	"tags": [],
+	"description": "",
+	"content": "Hi this is control system\n"
+},
+{
+	"uri": "http://example.org/machine_learning/",
+	"title": "2. Machine Learning",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "http://example.org/algorithm/",
+	"title": "3. Algorithm",
+	"tags": [],
+	"description": "",
+	"content": "Hi this is algorithm\n"
+},
+{
 	"uri": "http://example.org/categories/",
 	"title": "Categories",
 	"tags": [],
@@ -8,10 +29,10 @@
 },
 {
 	"uri": "http://example.org/",
-	"title": "Leo&#39;s Study Room",
+	"title": "Main Page",
 	"tags": [],
 	"description": "",
-	"content": ""
+	"content": "Hi this is the main page\n"
 },
 {
 	"uri": "http://example.org/tags/",
