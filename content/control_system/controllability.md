@@ -1,6 +1,5 @@
 ---
 title: "Controllability"
-draft: true
 ---
 ### 1. What is Controllability?
 #### 1.1 Main Concept

@@ -1,4 +1,4 @@
-baseURL = "http://example.org/"
+baseURL = "https://progressionist.github.io"
 languageCode = "en-us"
 title = "Leo's Study Room"
 theme = "hugo-theme-learn"
