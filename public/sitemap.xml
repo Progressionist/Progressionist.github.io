@@ -3,28 +3,32 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://example.org/control_system/</loc>
+    <loc>https://progressionist.github.io/control_system/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/machine_learning/</loc>
+    <loc>https://progressionist.github.io/machine_learning/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/algorithm/</loc>
+    <loc>https://progressionist.github.io/algorithm/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/categories/</loc>
+    <loc>https://progressionist.github.io/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://example.org/</loc>
+    <loc>https://progressionist.github.io/control_system/controllability/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/tags/</loc>
+    <loc>https://progressionist.github.io/</loc>
+  </url>
+  
+  <url>
+    <loc>https://progressionist.github.io/tags/</loc>
     <priority>0</priority>
   </url>
   

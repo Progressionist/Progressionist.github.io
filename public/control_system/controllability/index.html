@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 <link rel="icon" href="/images/favicon.png" type="image/x-icon" />
 
-    <title>Categories :: Leo&#39;s Study Room</title>
+    <title>Controllability :: Leo&#39;s Study Room</title>
     
     
     <link href="/css/nucleus.css?1526361097" rel="stylesheet">
@@ -62,7 +62,7 @@
 </script>
 
   </head>
-  <body class="" data-url="/categories/">
+  <body class="" data-url="/control_system/controllability/">
     <nav id="sidebar" class="">
 
 
@@ -121,7 +121,7 @@
   
     
     <li data-nav-id="/control_system/" title="1. Control System" class="dd-item 
-        
+        parent
         
         
         ">
@@ -145,7 +145,7 @@
  
   
     
-      <li data-nav-id="/control_system/controllability/" title="Controllability" class="dd-item ">
+      <li data-nav-id="/control_system/controllability/" title="Controllability" class="dd-item active">
         <a href="/control_system/controllability/">
         Controllability
         
@@ -248,7 +248,19 @@
                     
           
           
-            Categories
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/'>Main Page</a> > <a href='/control_system/'>1. Control System</a> > Controllability
+          
+         
+          
+         
           
            
                   </span>
@@ -256,7 +268,34 @@
                 
                     <div class="progress">
     <div class="wrapper">
-
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#1-what-is-controllability">1. What is Controllability?</a>
+<ul>
+<li><a href="#1-1-main-concept">1.1 Main Concept</a></li>
+<li><a href="#1-2-real-world-case">1.2 Real World Case:</a></li>
+<li><a href="#1-3-quick-example">1.3 Quick Example:</a></li>
+</ul></li>
+<li><a href="#2-controllability-matrix">2. Controllability Matrix</a>
+<ul>
+<li><a href="#2-1-the-controllability-matrix">2.1 The Controllability Matrix</a></li>
+<li><a href="#2-2-discrete-time-intuition">2.2 Discrete-Time Intuition</a></li>
+</ul></li>
+<li><a href="#3-degrees-of-controllability">3. Degrees of Controllability</a>
+<ul>
+<li><a href="#3-1-font-color-red-gramians-font">3.1 <font color=red>Gramians</font></a></li>
+<li><a href="#3-2-font-color-red-pbh-test-font">3.2 <font color=red>PBH Test</font></a></li>
+<li><a href="#3-3-font-color-red-cayley-hamilton-theory-font">3.3 <font color=red>Cayley-Hamilton Theory</font></a></li>
+<li><a href="#3-4">3.4</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
     </div>
 </div>
 
@@ -268,16 +307,147 @@
         
         <div id="body-inner">
           
-            <h1>Categories</h1>
+            <h1>Controllability</h1>
           
 
         
 
 
 
+<h3 id="1-what-is-controllability">1. What is Controllability?</h3>
+
+<h4 id="1-1-main-concept">1.1 Main Concept</h4>
+
+<p>Let&rsquo;s say in a linear system:
+$$ \begin{cases} \dot{x} &amp; =  &amp; \textbf{A}x + \textbf{B}u \newline
+y &amp; = &amp; \textbf{C}x\end{cases}$$</p>
+
+<p>If this system is controllable, then one can choose a control law $u$,
+and put <strong>eigenvalues</strong> of the new system in any places one wants, or
+(same meaning) steer the <strong>states</strong> of the system in any direction one likes.
+For example, if we choose control law $u = -Kx $, then the system becomes:</p>
+
+<p>$$ \begin{cases} \dot{x} &amp; = &amp; (\textbf{A} - \textbf{B} K )x \newline
+y &amp; = &amp; \textbf{C}x\end{cases}$$</p>
+
+<p>and now the old system $\textbf{A}$ matrix becomes $(\textbf{A} - \textbf{B} K )$ in the new system,
+if the system is controllable, by tuning control gains $\textbf{K}$,
+we can put eigenvalues of $(\textbf{A} - \textbf{B} K )$ in any places we want (put in left side of the imaginary plane to make it stable);
+or we can steer sates $\textbf{x}$ in any direction that we want.</p>
+
+<h4 id="1-2-real-world-case">1.2 Real World Case:</h4>
+
+<p>First, a recap of what $\textbf {A, B, C}$ matrix represents in a system:<br>
+$\textbf{A}:$ represents the system itself, relationships between all states;<br>
+$\textbf{B}:$ represents how the control input affect the system; <br>
+$\textbf{C}:$ represents sensors that can give information of the states
+(if this is identity matrix, that means full states feedback which means we can detect every
+state of the system).</p>
+
+<p>In real life, <strong>A</strong> matrix is already built and cannot be changed; most of the cases,
+<strong>B</strong> matrix is also built and cannot be changed. (Think about a car, <strong>A</strong> is how the
+car moves, and <strong>B</strong> is how steering wheel, throttle and brake affect <strong>A</strong>).
+Therefore, we can only choose a control law $u$ to control the system. However, if matrix
+<strong>A</strong> and <strong>B</strong> are not built correctly in the first place, then the system is not
+controllable no matter what $u$ we choose.</p>
+
+<h4 id="1-3-quick-example">1.3 Quick Example:</h4>
+
+<p>For a simple system, we can determine if it&rsquo;s controllable just by inspection:
+$$\begin{bmatrix} \dot{x_1} \newline \dot{x_2} \end{bmatrix} = \begin{bmatrix} 1&amp;0 \newline 0&amp;2 \end{bmatrix} \begin{bmatrix} x_1 \newline x_2 \end{bmatrix} + \begin{bmatrix}0 \newline 1\end{bmatrix} u$$
+By quick inspection, it&rsquo;s not hard to see that this system is not controllable because there&rsquo;s no way that $u$ can affect $x_1$.
+However, if we rebuild $\textbf{B}$ matrix and $u$ to be $\begin{bmatrix}1&amp;0 \newline 0&amp;1\end{bmatrix} \begin{bmatrix}u_1 \newline u_2 \end{bmatrix}$. Then is will be controllable.
+In another example:
+$$\begin{bmatrix} \dot{x_1} \newline \dot{x_2} \end{bmatrix} = \begin{bmatrix} 1&amp;1 \newline 0&amp;2 \end{bmatrix} \begin{bmatrix} x_1 \newline x_2 \end{bmatrix} + \begin{bmatrix}0 \newline 1\end{bmatrix} u$$
+The system is controllable because $u$ can affect $x_2$, and since $x_1$ is $x_2$ dependent, $u$ can also affect $x_1$.</p>
+
+<h3 id="2-controllability-matrix">2. Controllability Matrix</h3>
+
+<h4 id="2-1-the-controllability-matrix">2.1 The Controllability Matrix</h4>
+
+<p>For more complicated system, inspection is not possible to determine its controllability, yet we can use a controllability matrix to do that. The matrix consists of only $\textbf{A}$ and $\textbf{B}$ matrix:
+$$\mathcal{C} = \begin{bmatrix} B &amp; AB &amp; A^2B &amp; \cdots &amp; A^{n-1}B \end{bmatrix} $$
+for $ x \in \mathbb{R}^n$. <br>
+If and only if this controllability matrix $\mathcal{C}$ is full rank:
+$$rank(\mathcal{C}) = n$$
+then the system is controllable, otherwise it&rsquo;s uncontrollable.</p>
+
+<h4 id="2-2-discrete-time-intuition">2.2 Discrete-Time Intuition</h4>
+
+<p>One way to intuitively understand the controllability matrix is to use its discrete-time analogy, with an impulse response.
+The impulse response will give the system a &ldquo;kick&rdquo; in the $u$ direction. We let that input rings through the system, and then measure what happens in the system. Say the system has a discrete-time representation:
+$$x_{k+1} = \tilde{\textbf{A}} x_k + \tilde{\textbf{B}} u_k $$
+(notice that $\tilde{\textbf{A}}  \neq \textbf{A}$  and $\tilde{\textbf{B}}  \neq \textbf{B}$).<br />
+We then &ldquo;kick&rdquo; the system with an impulse response. In discrete-time, this is:
+$$u_0 = 1,  \ u_1 =0,  \ u_2 = 0, \ u_3 = 0, \ \cdots, \ u_m = 0 $$
+correspondingly, the system (states) will look like:
+$$x_0 = 0, \ x_1 = \tilde{\textbf{B}}, \ x_2 = \tilde{\textbf{A}} \tilde{\textbf{B}}, \ x_3 = \tilde{\textbf{A}}^2 \tilde{\textbf{B}}, \ \cdots, \ x_m = \tilde{\textbf{A}}^{m-1} \tilde{\textbf{B}}$$
+Generally speaking, if input $u$ rings through the system, and touches every state of the system ($\mathcal{C}$ is full rank), then we say the system is controllable.
+Otherwise, there will be some directions in state-space that my input cannot reach.</p>
+
+<h3 id="3-degrees-of-controllability">3. Degrees of Controllability</h3>
+
+<h4 id="3-1-font-color-red-gramians-font">3.1 <font color=red>Gramians</font></h4>
+
+<h4 id="3-2-font-color-red-pbh-test-font">3.2 <font color=red>PBH Test</font></h4>
+
+<p>PBH test is an extremely simple test for controllability with tremendous amount of insight into why and how controllable the system is.
+It states like this: a system a pair of $(\textbf{A}, \textbf{B})$ is controllable if and only if:
+$$rank[(\textbf{A} - \lambda \textbf{I}) \ \ \textbf{B}] = n,  \ \forall \ \lambda \in \mathbb{C}$$
+If the matrix $(\textbf{A} - \lambda \textbf{I})$ is full rank already, then the system already passed the PBH test and it s controllable.
+So, the right question to ask it that when it is not full rank (rank deficient)? We say a matrix is rank deficient only when its
+determinant is zero: $det(\textbf{A} - \lambda \textbf{I}) = 0$, and this is only true when $\lambda$ are <strong>eigenvalues</strong> of matrix $\textbf{A}$.$\color{red}{*}$</p>
+
+<p>Based on the statements above, the PBH test can give us below insights:</p>
+
+<ol>
+<li><p>When use PBH test, instead to test in all complex plane $\mathbb{C}$, we only need to plug \textbf{eigenvalues} of matrix $\textbf{A}$ into $\lambda$,
+if still $rank[(\textbf{A} - \lambda \textbf{I}) \ \ \textbf{B}] = n$, then the system is controllable.</p></li>
+
+<li><p>Since $(\textbf{A} - \lambda \textbf{I})v = 0$, when $\lambda$ is eigenvalues, then the matrix $(\textbf{A} - \lambda \textbf{I})$ is rank deficient
+in the directions of $\textbf{eigenvectors} \ &ldquo;v&rdquo;$. Therefore, in order for the system to past the PBH test, matrix $\textbf{B}$ has to compliment, or say
+have some components in the directions of $\textbf{eigenvectors} \ &ldquo;v&rdquo;$.</p></li>
+
+<li><p>If matrix $\textbf{A}$ has a eigenvalue with multiplicity greater than $1$ (it has repeated eigenvalues). Let&rsquo;s say that the matrix has 2 same eigenvalues,
+then the matrix is rank deficient in 2 eigenvector directions. Therefore, we need to have a $\textbf{B}$ matrix that has 2 independent columns to fill in the null space.
+In other words, we will need to have 2 control knobs to make this system pass the PBH test. $\color{red}{*}$</p></li>
+</ol>
+
+<h4 id="3-3-font-color-red-cayley-hamilton-theory-font">3.3 <font color=red>Cayley-Hamilton Theory</font></h4>
+
+<p>Cayley-Hamilton Theory is extremely important, and it states like this:</p>
+
+<p>&ldquo;Every square matrix <strong>A</strong> satisfies its own characteristic (eigenvalue) equation.&rdquo;   In mathmatics, for a matrix <strong>A</strong>, where its characteristics or eigenvalue
+equation:
+$$det(\textbf{A} - \lambda \textbf{I}) = 0$$
+in another term $\color{red}{*}$:
+$$\lambda^n + a_{n-1} \lambda^{n-1} + &hellip; + a_2 \lambda^{2} + a_1 \lambda + a_0 = 0$$</p>
+
+<p>We can get, according to Cayley-Hamilton Theory:
+$$\textbf{A}^n + a_{n-1} \textbf{A}^{n-1} + &hellip; + a_2 \textbf{A}^{2} + a_1 \textbf{A} + a_0 \textbf{I} = 0$$</p>
+
+<p>Move second to last terms to the right hand side of the matrix, we can get:
+$$\textbf{A}^n = - a_0 \textbf{I} - a_1 \textbf{A} - a_2 \textbf{A}^{2} - &hellip; - a_{n-1} \textbf{A}^{n-1}$$</p>
+
+<p>this can be further simplified into:
+$$\textbf{A}^{\geq n} = \sum_{j=0}^{n-1} \alpha_j \textbf{A}^j$$</p>
+
+<p>This is remarkable because we can now sum a matrix $\textbf{A}$ to the $n$th power into a neat form. Recall that for a system $\dot{x} =  \textbf{A}x + \textbf{B}u$, the solution is:
+$$e^{\textbf{A}t} = \textbf{I} + \textbf{A}t + \frac{\textbf{A}^2 t^2}{2} + \frac{\textbf{A}^3 t^3}{3} + &hellip;$$</p>
+
+<p>and now, we can transform this endless equation into:
+$$e^{\textbf{A}t} = \phi_0 (t) \textbf{I} + \phi_1 (t) \textbf{A} + \phi_2 (t) \textbf{A}^2 + &hellip; + \phi_{n-1} (t) \textbf{A}^{n-1}.$$</p>
+
+<p>period. We therefore successfully utilizing Caley-Hamilton Theory to represent $e^{\textbf{A}t}$ into a sum of finite series of powers of <strong>A</strong> up to $n-1$, with time-variant coefficients $\phi&rsquo;s$.
+This finite sum allows us to show mathmatically that controllabilty and reachablity are equivalent.</p>
+
+<h4 id="3-4">3.4</h4>
+
+
 <footer class=" footline" >
 	
 </footer>
+
 
         
         </div> 
@@ -308,8 +478,6 @@
             
                 
                     
-                        
-                        
                     
                 
                 
@@ -324,6 +492,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -334,6 +503,25 @@
                     
             
         
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
                     
             
         
@@ -354,22 +542,6 @@
             
         
                     
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
             
         
         
@@ -377,8 +549,10 @@
 
 
         
+            <a class="nav nav-prev" href="/control_system/" title="1. Control System"> <i class="fa fa-chevron-left"></i></a>
         
-            <a class="nav nav-next" href="/control_system/" title="1. Control System" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+        
+            <a class="nav nav-next" href="/machine_learning/" title="2. Machine Learning" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
         
     </div>
 
@@ -426,3 +600,4 @@
 
   </body>
 </html>
+
